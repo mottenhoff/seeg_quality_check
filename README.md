@@ -7,9 +7,7 @@ Tested with python 3.9.2
 
 ### Usage
 1) Copy files to a folder
-
-In a new file:
-2) `import check_quality`
+2) In a new file: `import check_quality`
 3) `qc = check_quality.QualityChecker()`
 4) `qc.run_all( eeg: np.array,
                 timestamps: np.array,
