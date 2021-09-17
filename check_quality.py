@@ -331,7 +331,7 @@ if __name__=='__main__':
         sys.path.insert(0, path)
     from read_xdf import read_xdf
 
-    path = r'L:\FHML_MHeNs\sEEG\kh9\grasp.xdf'
+    path = r'your_path_to_xdf'
     data, raw = read_xdf(path)
     
     plot = False

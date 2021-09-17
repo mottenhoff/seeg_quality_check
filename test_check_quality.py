@@ -103,7 +103,7 @@ if __name__ == '__main__':
         sys.path.insert(0, path)
     from read_xdf import read_xdf
 
-    path = r'L:\FHML_MHeNs\sEEG\\'
+    path = r'your_path_to_folders'
     files = _get_related_files(path)
     results = []
     for i, file in enumerate(files):
