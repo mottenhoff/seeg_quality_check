@@ -25,7 +25,7 @@ class QualityChecker:
 
     def _has_n_unique_values(self, 
                             eeg: np.array,
-                            n_values: int):
+                            n_values: int) -> list:
         if n_values==1:
             # Vectorized method for efficiency.    
             flagged_channels = np.where(np.all(eeg == eeg[0], axis=0))[0]
@@ -37,7 +37,7 @@ class QualityChecker:
     def get_marker_channels(self, 
                             eeg: np.array,
                             channel_names: list=None,
-                            plot: bool=False):
+                            plot: bool=False) -> list:
 
         if channel_names:
             flagged_channels = [i for i, ch in enumerate(channel_names) if 'MKR' in ch]
@@ -61,7 +61,7 @@ class QualityChecker:
     def get_ekg_channel(self,
                         eeg: np.array,
                         channel_names: list=None,
-                        plot: bool=False):
+                        plot: bool=False) -> list:
         
         if channel_names:
             flagged_channel = [i for i, ch in enumerate(channel_names) if 'EKG' in ch]
@@ -97,7 +97,7 @@ class QualityChecker:
     def get_disconnected_channels(self,
                                   eeg: np.array,
                                   channel_names: list=None,
-                                  plot: bool=False):
+                                  plot: bool=False) -> list:
         if channel_names:
             pattern = '(?<![A-Za-z])[Ee][l\d]'
             flagged_channels = [i for i, name in enumerate(channel_names) \
@@ -148,7 +148,7 @@ class QualityChecker:
         
         # 3) determine the distance metric
         if not distance_metric:
-            def distance_metric(line_noise, **kwargs):
+            def distance_metric(line_noise: np.array, **kwargs) -> float:
                 # Finds the interquartile distance (75% - 25%)
                 quartile_75 = np.percentile(line_noise, 75, interpolation='linear')
                 quartile_25 = np.percentile(line_noise, 25, interpolation='linear')
@@ -299,7 +299,7 @@ class QualityChecker:
                 fs: Union[int, float],
                 channel_names: list=None,
                 return_all_flagged_channels: bool=False,
-                plot: bool=False) -> bool:
+                plot: bool=False) -> Union[None, list]:
 
         self.consistent_timestamps(timestamps, float(fs), plot=plot)
         self.excessive_line_noise(eeg, float(fs), plot=plot)
@@ -332,6 +332,7 @@ if __name__=='__main__':
     from read_xdf import read_xdf
 
     path = r'your_path_to_xdf'
+    path = r'L:\FHML_MHeNs\sEEG\kh12\20200615\grasp.xdf'
     data, raw = read_xdf(path)
     
     plot = False
