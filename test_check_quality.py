@@ -7,11 +7,6 @@ import sys
 from pathlib import Path
 from os.path import exists
 
-paths = [r"./../../Utility/Helpers/xdf_reader/"]
-for path in paths:
-    sys.path.insert(0, path)
-from read_xdf import read_xdf
-
 from check_quality import QualityChecker
 
 VERBOSE = True
@@ -103,6 +98,11 @@ def print_results(results, file=None):
         f.close()
 
 if __name__ == '__main__':
+    paths = [r"./../../Utility/Helpers/xdf_reader/"]
+    for path in paths:
+        sys.path.insert(0, path)
+    from read_xdf import read_xdf
+
     path = r'L:\FHML_MHeNs\sEEG\\'
     files = _get_related_files(path)
     results = []
